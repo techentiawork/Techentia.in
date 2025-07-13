@@ -23,8 +23,8 @@ function Portfolio({portfolioRef}) {
   <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751798865/video4_ocjdmw.mp4" title="AI_Bank" desc="Payment Invoicing Service" />
 </a>
 
-<a href="">
-  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751798825/brainwave_h4lhnk.mp4" title="Brainwave" desc="AI Powered Website" />
+<a href="https://coin.unibit.app">
+  <PortfolioCard src="https://res.cloudinary.com/dknid1fma/video/upload/v1752430941/UNIBIT_cghi19.mp4" title="Unibit" desc="Gaming Platform" />
 </a>
 
 <a href="https://nika.finance">
