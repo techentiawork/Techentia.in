@@ -77,7 +77,7 @@ function Services({servicesRef}) {
     {
       id: 8,
       image: solana,
-      heading: "Solana Wallet Integration",
+      heading: "Blockchain Wallet Development",
       desc: "Power Your App with Solana – Fast, Secure, Scalable.",
       price: '400K-1100K',
       time:'11-13 weeks',

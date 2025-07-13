@@ -12,11 +12,11 @@ function Portfolio({portfolioRef}) {
 </a>
 
 <a href="https://nimbi2.vercel.app"  >
-  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751799130/nimbi_p81ev8.mp4" title="Nimbi" desc="Crypto project" />
+  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751799130/nimbi_p81ev8.mp4" title="Nimbi" desc="Crypto Project" />
 </a>
 
-<a href="">
-  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751799140/paper_portfolio_b7em3j.mp4" title="Paper" desc="Portfolio website" />
+<a href="https://runes-bridge-v5.vercel.app">
+  <PortfolioCard src="https://res.cloudinary.com/dknid1fma/video/upload/v1752427491/runes_uxjtmp.mp4" title="Runes-Bridge" desc="Design That Moves You" />
 </a>
 
 <a href="" >
@@ -24,11 +24,11 @@ function Portfolio({portfolioRef}) {
 </a>
 
 <a href="">
-  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751798825/brainwave_h4lhnk.mp4" title="Brainwave" desc="AI powered website" />
+  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751798825/brainwave_h4lhnk.mp4" title="Brainwave" desc="AI Powered Website" />
 </a>
 
-<a href="">
-  <PortfolioCard src="https://res.cloudinary.com/dmn1hq9nq/video/upload/v1751799161/Taskmate_n0fjwv.mp4" title="Taskmate" desc="Task Management Tool" />
+<a href="https://nika.finance">
+  <PortfolioCard src="https://res.cloudinary.com/dknid1fma/video/upload/v1752427515/nika_cz9mzw.mp4" title="Nika" desc="Blogging Platform" />
 </a>
  </div>
       </div>
