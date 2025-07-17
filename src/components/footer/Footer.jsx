@@ -1,71 +1,90 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { logo, logo2 } from '../../assets';
 
-function Footer({ homeRef, aboutRef, servicesRef,portfolioRef,contactRef,faqRef}) {
+function Footer({ homeRef, aboutRef, servicesRef, portfolioRef, contactRef, faqRef }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const scrollToSection = (ref) => {
     if (ref.current) {
       window.scrollTo({ top: ref.current.offsetTop, left: 0, behavior: 'smooth' });
-    } else {
-      console.error(ref);
     }
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (!email || !email.includes("@")) {
       setError("Please enter a valid email address.");
       setTimeout(() => setError(null), 2000);
       return;
     }
 
-    axios.get(`https://script.google.com/macros/s/AKfycbzgFHCKgZf8T4M6m6pFeOkp-Ai-Ys_8H8Sa7nXeTEFn8MPo9rhpFeYRnMORVfRXurGSsQ/exec?email=${email}`)
-      .then(res => {
-        setError("Email sent successfully!");
-        setTimeout(() => setError(null), 2000);
-        setEmail('')
-      })
-      .catch(err => {
-        setError("An error occurred. Try again later.");
-        setTimeout(() => setError(null), 2000);
-        return;
-      });
+    setLoading(true);
+
+    try {
+      const formBody = new URLSearchParams({ email });
+      const response = await axios.post(
+        'https://script.google.com/macros/s/AKfycbyfrC2AyEkMP63zGWmySgHW43nTkhS_GnSCUuGmjUBEfv7b1CoojcmhgzPX9ILvjig4/exec',
+        formBody
+      );
+      console.log("Response:", response);
+      setError("Email sent successfully!");
+      setEmail('');
+    } catch (err) {
+      console.error("Request failed:", err);
+      setError("An error occurred. Try again later.");
+    } finally {
+      setTimeout(() => setError(null), 2000);
+      setLoading(false);
+    }
   };
 
   return (
     <footer className="text-black w-[85%] mx-auto py-12 flex flex-col gap-12">
-
       <div className="mx-auto grid grid-cols-2 lg:grid-cols-3 gap-y-6 md:gap-6 w-full">
         <div className="flex flex-col items-center">
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             <h3 className="text-2xl sm:text-3xl font-semibold mb-4">Useful Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="" onClick={() => scrollToSection(homeRef)}>Home</Link></li>
-              <li><Link to="/" className="" onClick={() => scrollToSection(aboutRef)}>About</Link></li>
-              <li><Link to="/" className="" onClick={() => scrollToSection(servicesRef)}>Services</Link></li>
-              <li><Link to="/" className="" onClick={() => scrollToSection(portfolioRef)}>Portfolio</Link></li>
+              <li><Link to="/" onClick={() => scrollToSection(homeRef)}>Home</Link></li>
+              <li><Link to="/" onClick={() => scrollToSection(aboutRef)}>About</Link></li>
+              <li><Link to="/" onClick={() => scrollToSection(servicesRef)}>Services</Link></li>
+              <li><Link to="/" onClick={() => scrollToSection(portfolioRef)}>Portfolio</Link></li>
             </ul>
           </div>
         </div>
+
         <div className="flex flex-col items-center">
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             <h3 className="text-2xl sm:text-3xl font-semibold mb-4">Pricing</h3>
-            <ul className=" space-y-2">
-              <li><Link to="/" className="" onClick={() => scrollToSection(servicesRef)}>Packages</Link></li>
-              <li><Link to="/" className="" onClick={() => scrollToSection(faqRef)}>FAQ</Link></li>
-              <li><Link to="/" className="" onClick={() => scrollToSection(contactRef)}>Contact</Link></li>
+            <ul className="space-y-2">
+              <li><Link to="/" onClick={() => scrollToSection(servicesRef)}>Packages</Link></li>
+              <li><Link to="/" onClick={() => scrollToSection(faqRef)}>FAQ</Link></li>
+              <li><Link to="/" onClick={() => scrollToSection(contactRef)}>Contact</Link></li>
             </ul>
           </div>
         </div>
+
         <div className="flex flex-col items-center col-span-2 lg:col-span-1">
           <div className="flex flex-col gap-4 relative">
             <h3 className="text-2xl sm:text-3xl font-semibold">Contact Us Now</h3>
-            <input type="email" value={email} placeholder="Enter your Email Address" className="bg-transparent border-b-2 focus:border-b-black text-black px-4 py-2 focus:outline-none border-gray-400" onChange={e => setEmail(e.target.value)} />
-            <button className="w-max bg-black py-3 px-7 rounded-3xl text-white font-semibold hover:-translate-y-[2px] transition-all ease-in duration-300" onClick={submit}>Contact</button>
-            {error && <p className="text--500 font-medium absolute -bottom-8 whitespace-nowrap">{error}</p>}
+            <input
+              type="email"
+              value={email}
+              placeholder="Enter your Email Address"
+              className="bg-transparent border-b-2 focus:border-b-black text-black px-4 py-2 focus:outline-none border-gray-400"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button
+              className={`w-max bg-black py-3 px-7 rounded-3xl text-white font-semibold transition-all ease-in duration-300 hover:-translate-y-[2px] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={submit}
+              disabled={loading}
+            >
+              {loading ? "Sending..." : "Contact"}
+            </button>
+            {error && <p className="text-Green-500 font-medium absolute -bottom-8 whitespace-nowrap">{error}</p>}
           </div>
         </div>
       </div>
